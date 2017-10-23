@@ -28,7 +28,7 @@
                             {{#each Item}}
                                 {{#unless this.reserved}}
                                     {{!--  index should append the current #each iteration to the id and class --}}
-                                    <tr id="item-table-{{@index}}" class="table-content item-table-{{@key}}">
+                                    <tr id="item-table-{{@key}}" class="table-content item-table-{{@key}}">
                                         <td>
                                             {{!-- Item Name --}}
                                             <h4>{{this.name}}</h4>
