@@ -55,7 +55,7 @@ router.get("/api/:item", function(req, res) {
   router.post("/api/reserved", function(req, res) {
     console.log("Item:");
     console.log(req.body);
-    Item.update({
+    db.item.update({
       reserved: true,
     },{
       where: {
@@ -65,7 +65,7 @@ router.get("/api/:item", function(req, res) {
   });
 
   router.get("/api/reserved", function(req, res) {
-      Item.findAll({
+      db.item.findAll({
         where: {
           reserved: true,
         }
@@ -89,3 +89,34 @@ router.get("/api/:item", function(req, res) {
         console.log(err);
     });
 });
+
+router.get('/available', function(req, res){
+    // retrieve all data from food_db
+    db.item.findAll({
+        where:{
+            reserved: false
+        }
+    }).then(function(data){
+        var hbsObject = { hbsObject : data};
+        res.render('available', hbsObject)
+    }).catch(function(err){
+        console.log(err);
+    });
+});
+
+router.get('/add', function(req, res){
+    // retrieve all data from food_db
+    db.item.findAll({
+        where:{
+            reserved: false
+        }
+    }).then(function(data){
+        var hbsObject = { hbsObject : data};
+        res.render('add', hbsObject)
+    }).catch(function(err){
+        console.log(err);
+    });
+});
+
+// Export routes for server.js to use.
+module.exports = router;
