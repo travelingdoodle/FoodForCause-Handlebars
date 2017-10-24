@@ -1,119 +1,171 @@
 var express = require('express');
 var router = express.Router();
-var db = require ('../models');
+var db = require('../models');
 
 
 /*==================================EXPRESS ROUTES====================================*/
 
-router.get('/', function(req, res){
+router.get('/', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
-        where:{
+        where: {
             reserved: false
         }
-    }).then(function(data){
-        var hbsObject = { hbsObject : data};
+    }).then(function (data) {
+        var hbsObject = { hbsObject: data };
         res.render('index', hbsObject)
-    }).catch(function(err){
+        console.log("`/` router working for index");
+    }).catch(function (err) {
         console.log(err);
     });
 });
 
-router.get("/api/:item", function(req, res) {
-    if (req.params.item) {
-      Item.findAll({
-        where: {
-          name: req.params.item
-        }
-      }).then(function(results) {
-        res.json(results);
-      });
+// not entirely sure what this does
+router.put("/api/:id", function (req, res) {
+    console.log("reserved button got hit, dawg");
+    if (req.params.id) {
+        db.item.update({
+            reserved: true
+        }, {
+            where : {
+                id: req.params.id
+            }
+        }).then(function (results) {
+            res.redirect('back');
+        }).catch(function(err){
+            console.log(err);
+        });
     }
-  });
+});
 
-  router.post("/api/new", function(req, res) {
+// creates a new item in the database (or it should)
+// needs to be updated... or eliminated
+router.post("/api/new", function (req, res) {
     console.log("Item:");
     console.log(req.body);
     Item.create({
-      name: req.body.name,
-      category: req.body.category,
-      quantity: req.body.quantity,
-      expiration: req.body.expiration,
+        name: req.body.name,
+        category: req.body.category,
+        quantity: req.body.quantity,
+        expiration: req.body.expiration,
     });
-  });
+});
 
-  router.post("/api/delete", function(req, res) {
+// not currently using this... not sure that we need it
+router.post("/api/delete", function (req, res) {
     console.log("Item:");
     console.log(req.body);
     Item.destroy({
-      where: {
-        id: req.body.id
-      }
+        where: {
+            id: req.body.id
+        }
     });
-  });
+});
 
-  router.post("/api/reserved", function(req, res) {
+// HAVE NOT TESTED YET
+router.post("/api/reserved", function (req, res) {
     console.log("Item:");
     console.log(req.body);
     db.item.update({
-      reserved: true,
-    },{
-      where: {
-        id: req.body.id
-      }  
-    });
-  });
+        reserved: true,
+    }, {
+            where: {
+                id: req.body.id
+            }
+        });
+});
 
-  router.get("/api/reserved", function(req, res) {
-      db.item.findAll({
+// DO WE NEED THIS?
+router.get("/api/reserved", function (req, res) {
+    db.item.findAll({
         where: {
-          reserved: true,
+            reserved: true,
         }
-      }).then(function(results) {
+    }).then(function (results) {
         res.json(results);
-      });
-  });
+    });
+});
 
-  // search
-  router.get("/search", function(req, res) {
-    itemSearch = req.body.item_search;
+// Populates search.hbs it works... BUT DO I NEED THE `itemSearch` var? 
+router.get("/search", function (req, res) {
+    // itemSearch = req.body.item_search;
+    // console.log(itemSearch + "1");
+    // db.item.findAll({
+    //     where: {
+    //         //name: itemSearch,
+    //         reserved: false
+    //     }
+    // }).then(function (data) {
+    //     var hbsObject = { hbsObject: data };
+    //     res.render('search', hbsObject)
+    // }).catch(function (err) {
+    //     console.log(err);
+    // });
+    res.render('search');
+    console.log("search route working");
+});
+
+// Searches based on what is input into the form action=newSearch in search.hbs
+router.post("/newSearch", function (req, res) {
+    itemSearch = req.body.userSearch;
+    console.log(itemSearch + "2");
     db.item.findAll({
-      where: { 
-        name: itemSearch,
-        reserved: false
-      }
-    }).then(function(data){
-        var hbsObject = { hbsObject : data};
+        where: {
+            name: itemSearch,
+            reserved: false
+        }
+    }).then(function (data) {
+        console.log(data);
+        var hbsObject = { item: data };
         res.render('search', hbsObject)
-    }).catch(function(err){
+    }).catch(function (err) {
         console.log(err);
     });
 });
 
-router.get('/available', function(req, res){
+router.get('/available', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
-        where:{
+        where: {
             reserved: false
         }
-    }).then(function(data){
-        var hbsObject = { hbsObject : data};
+    }).then(function (data) {
+        console.log("available items" + data);
+        var hbsObject = { item: data };
         res.render('available', hbsObject)
-    }).catch(function(err){
+    }).catch(function (err) {
         console.log(err);
     });
 });
 
-router.get('/add', function(req, res){
+
+router.get('/add', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
-        where:{
+        where: {
             reserved: false
         }
-    }).then(function(data){
-        var hbsObject = { hbsObject : data};
+    }).then(function (data) {
+        var hbsObject = { hbsObject: data };
         res.render('add', hbsObject)
-    }).catch(function(err){
+        console.log("`/add` router working");
+    }).catch(function (err) {
+        console.log(err);
+    });
+});
+
+//router post for ./add
+router.post("/add/new", function (req, res) {
+    console.log("Item:");
+    console.log(req.body);
+    db.item.create({
+        name: req.body.name,
+        category: req.body.category,
+        quantity: req.body.quantity,
+        expiration: req.body.expiration,
+    }).then(function (data) {
+        res.redirect('/add');
+    }).catch(function (err) {
         console.log(err);
     });
 });

@@ -24,35 +24,38 @@
                             </tr>
                         </thead>
                         <tbody id="table-content">
-                            {{!-- handlebars.js to populate all items that reserved = 0 --}}
-                            {{#each Item}}
+                            <!-- handlebars.js to populate all items that reserved = 0 -->
+                            {{#each item}}
                                 {{#unless this.reserved}}
-                                    {{!--  index should append the current #each iteration to the id and class --}}
+                                    <!--index should append the current #each iteration to the id and class -->
                                     <tr id="item-table-{{@key}}" class="table-content item-table-{{@key}}">
                                         <td>
-                                            {{!-- Item Name --}}
+                                            <!-- Item Name -->
+                                            <h4>{{this.id}}</h4>
+                                        </td>
+                                        <td>
+                                            <!-- Item Name -->
                                             <h4>{{this.name}}</h4>
                                         </td>
                                         <td>
-                                            {{!-- Item Category --}}
+                                            <!-- Item Category -->
                                             <h4>{{this.category}}</h4>
                                         </td>
                                         <td>
-                                            {{!-- Item Quantity --}}
+                                            <!-- Item Quantity -->
                                             <h4>{{this.quantity}}</h4>
                                         </td>
                                         <td>
-                                            {{!-- Item Expiration --}}
+                                            <!-- Item Expiration -->
                                             <h4>{{this.expiration}}</h4>
                                         </td>
                                         <td>
-                                            {{!-- Reserve Button --}}
+                                            <!-- Reserve Button -->
                                             <h4>
-                                                <form action="index/update/{{this.id}}?_method=PUT" method="POST" class="button-size">
-										
-										            <input type="hidden" name="reserve" value="1">
-										            <button type="submit" class="reserve btn btn-primary" data-id="{{this.id}}">Reserve!</button>
-								                </form>
+                                                <form action="/api/{{this.id}}?_method=PUT" method="POST" class="button-size">
+                                                    <input type="hidden" name="reserve" value="1">
+                                                    <button type="submit" class="reserve btn btn-primary" data-id="{{this.id}}">Reserve!</button>
+                                                </form>
                                             </h4>
                                         </td>
                                     </tr>
