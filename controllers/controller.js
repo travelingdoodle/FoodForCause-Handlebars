@@ -170,5 +170,10 @@ router.post("/add/new", function (req, res) {
     });
 });
 
+router.get("/about", function (req, res) {
+    res.render('about');
+    console.log("search route working");
+});
+
 // Export routes for server.js to use.
 module.exports = router;

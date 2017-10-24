@@ -65,6 +65,10 @@
  .text-faded {
      color: #F05F40;
  }
+ .text-about { 
+    text-shadow: 1px 1px rgb(0, 0, 0) !important;
+    color: white !important;
+ }
  
  section {
      padding: 100px 0;
