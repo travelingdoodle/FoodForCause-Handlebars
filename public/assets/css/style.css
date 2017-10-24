@@ -531,11 +531,16 @@
      border-bottom: 1px solid white;
  }
  
- #availTable {
+ #availTable, #searchTable {
      margin-top: 50px;
      background: rgba(0,0,0,0.35);
  }
  
  #homeHeading {
      font-family: 'Special Elite', cursive;
+ }
+
+ #searchTable {
+    /* border-top: 1px solid white;  */
+    margin-top: 10px;
  }

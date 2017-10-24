@@ -20,7 +20,7 @@ router.get('/', function (req, res) {
     });
 });
 
-// not entirely sure what this does
+// Takes id of reserved item and changes status in db.items
 router.put("/api/:id", function (req, res) {
     console.log("reserved button got hit, dawg");
     if (req.params.id) {
@@ -38,8 +38,7 @@ router.put("/api/:id", function (req, res) {
     }
 });
 
-// creates a new item in the database (or it should)
-// needs to be updated... or eliminated
+// creates a new item in the database
 router.post("/api/new", function (req, res) {
     console.log("Item:");
     console.log(req.body);
@@ -51,16 +50,16 @@ router.post("/api/new", function (req, res) {
     });
 });
 
-// not currently using this... not sure that we need it
-router.post("/api/delete", function (req, res) {
-    console.log("Item:");
-    console.log(req.body);
-    Item.destroy({
-        where: {
-            id: req.body.id
-        }
-    });
-});
+// not currently using this... COMMENTED 11:27PM MONDAY OCT 21ST
+// router.post("/api/delete", function (req, res) {
+//     console.log("Item:");
+//     console.log(req.body);
+//     Item.destroy({
+//         where: {
+//             id: req.body.id
+//         }
+//     });
+// });
 
 // HAVE NOT TESTED YET
 router.post("/api/reserved", function (req, res) {
@@ -138,7 +137,8 @@ router.get('/available', function (req, res) {
     });
 });
 
-
+// MIGHT BE ABLE TO SHORTEN THIS, BECAUES WE DON'T NEED TO get that data or log it....
+// ********** LOOK @ /search **********
 router.get('/add', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
