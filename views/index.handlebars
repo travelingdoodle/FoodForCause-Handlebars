@@ -5,7 +5,7 @@
             <hr>
             <p>Help supply local food pantries, to make Kansas City a better place.</p>
             <h4 style="text-align: center; margin-bottom: 30px;">Login Below</h4>
-            <!-- 8-37 came from Nuanced as an example. routes do not work -->
+            <!-- 8-38 need updated routes and other info -->
             {{!-- Bootstrap Form --}}
             <form action="/login" method="POST" class="contact-form" id="contact-form">
                 <div class="form-group">
@@ -19,10 +19,11 @@
                     <input class="form-control" type="password" name="password" placeholder="Enter your password here." rows="5"></input>
                 </div>
                 <button type="submit" class="btn btn-primary" id="edit-topic-button">LOGIN</button>
-                <input type="hidden" name="_next" value="//" /> {{!-- Failure Form Submit --}}
+                <input type="hidden" name="_next" value="//" />
+                {{!-- Failure Form Submit --}}
                 <div class="submit-fail" style="display:none;">There was an error when attempting to submit your form.
                     <br>Email
-                    <a href="mailto:hi@elijah.io" title="Elijah's Email Address" alt="Elijah's Email Address">hi@elijah.io</a> or try again later.</div>
+                    <a href="mailto:reggiebrown@gmail.com" title="Reggie's Email Address" alt="Reggie's Email Address">reggiebrown@gmail.com</a> or try again later.</div>
                 {{!-- Successful Form Submit --}}
                 <div class="submit-success" style="display:none;">Thanks! I got your message and will follow-up shortly.</div>
             </form>
@@ -36,6 +37,7 @@
                     </div>
                 </div>
             </div>
+      
             <!-- Original login button, with working route -->
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="/search" id="login-btn">Login</a>
         </div>
@@ -106,6 +108,14 @@
                     </a>
                 </div>
             </div>
+        </div>
+       
+    </div>
+    <br/>
+    <!-- Link to gitrepo for people to report issues-->
+    <div class="row">
+        <div class="col-lg-12 col-md-6 text-center">
+            <a href="https://github.com/travelingdoodle/project2/issues">Report Issue</a>
         </div>
     </div>
 </section>

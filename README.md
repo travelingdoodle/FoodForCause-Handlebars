@@ -52,4 +52,5 @@
 * Connect on FB/ IG..?
 * Authentication
     * Reestablish (Disabled for ease of Presentation)
+    * __Oct 27__ Google Auth to add to calendar.
 * Testing
