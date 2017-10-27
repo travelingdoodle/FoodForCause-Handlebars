@@ -1,3 +1,5 @@
+/*==================================Dependencies====================================*/
+
 var express = require('express');
 var router = express.Router();
 var db = require('../models');
@@ -5,6 +7,7 @@ var db = require('../models');
 
 /*==================================EXPRESS ROUTES====================================*/
 
+// Populates index.hbs
 router.get('/', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
@@ -38,7 +41,7 @@ router.put("/api/:id", function (req, res) {
     }
 });
 
-// creates a new item in the database
+// creates a new item in the database table Item 
 router.post("/api/new", function (req, res) {
     console.log("Item:");
     console.log(req.body);
@@ -50,18 +53,7 @@ router.post("/api/new", function (req, res) {
     });
 });
 
-// not currently using this... COMMENTED 11:27PM MONDAY OCT 21ST
-// router.post("/api/delete", function (req, res) {
-//     console.log("Item:");
-//     console.log(req.body);
-//     Item.destroy({
-//         where: {
-//             id: req.body.id
-//         }
-//     });
-// });
-
-// HAVE NOT TESTED YET
+// TESTED & Working to change items to reserved
 router.post("/api/reserved", function (req, res) {
     console.log("Item:");
     console.log(req.body);
@@ -74,7 +66,7 @@ router.post("/api/reserved", function (req, res) {
         });
 });
 
-// DO WE NEED THIS?
+// populates reserved.hbs. | used in the admin view
 router.get("/api/reserved", function (req, res) {
     db.item.findAll({
         where: {
@@ -85,21 +77,8 @@ router.get("/api/reserved", function (req, res) {
     });
 });
 
-// Populates search.hbs it works... BUT DO I NEED THE `itemSearch` var? 
+// Populates search.hbs
 router.get("/search", function (req, res) {
-    // itemSearch = req.body.item_search;
-    // console.log(itemSearch + "1");
-    // db.item.findAll({
-    //     where: {
-    //         //name: itemSearch,
-    //         reserved: false
-    //     }
-    // }).then(function (data) {
-    //     var hbsObject = { hbsObject: data };
-    //     res.render('search', hbsObject)
-    // }).catch(function (err) {
-    //     console.log(err);
-    // });
     res.render('search');
     console.log("search route working");
 });
@@ -137,7 +116,7 @@ router.get('/available', function (req, res) {
     });
 });
 
-// MIGHT BE ABLE TO SHORTEN THIS, BECAUES WE DON'T NEED TO get that data or log it....
+// MIGHT BE ABLE TO SHORTEN THIS, because we don't NEED TO get that data...
 // ********** LOOK @ /search **********
 router.get('/add', function (req, res) {
     // retrieve all data from food_db
@@ -173,6 +152,26 @@ router.post("/add/new", function (req, res) {
 router.get("/about", function (req, res) {
     res.render('about');
     console.log("search route working");
+});
+
+// Creates /register route
+router.get("/register", function(req, res) {
+    res.render("register");
+    console.log("register route working");
+  });
+
+// rout works, user table not yet made
+router.post("/register", function(req, res) {
+    db.User.register(new db.User({username: req.body.username}), req.body.password, function(err, user) {
+      if(err) {
+        req.flash("error", err.message);
+        return res.redirect("/register");
+      }
+      passport.authenticate("local")(req, res, function() {
+        req.flash("success", "Welcome to Food For Cause " + user.username);
+        res.redirect("/search");
+      });
+    });
 });
 
 // Export routes for server.js to use.
