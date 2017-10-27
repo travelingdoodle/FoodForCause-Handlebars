@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models');
 
-
 /*==================================EXPRESS ROUTES====================================*/
 
 // Populates index.hbs
@@ -154,13 +153,15 @@ router.get("/about", function (req, res) {
     console.log("search route working");
 });
 
+// AUTH ROUTES 
+
 // Creates /register route
 router.get("/register", function(req, res) {
     res.render("register");
     console.log("register route working");
   });
 
-// rout works, user table not yet made
+// User table not yet made
 router.post("/register", function(req, res) {
     db.User.register(new db.User({username: req.body.username}), req.body.password, function(err, user) {
       if(err) {
@@ -172,6 +173,19 @@ router.post("/register", function(req, res) {
         res.redirect("/search");
       });
     });
+});
+// 177 -189 not yet implimented anywhere else
+router.post("/login", passport.authenticate("local",
+{
+  successRedirect: "/search",
+  failureRedirect: "/index"
+}), function(req, res) {
+});
+
+router.get("/logout", function(req, res) {
+req.logout();
+req.flash("success", "Logged Out");
+res.redirect("/index");
 });
 
 // Export routes for server.js to use.
