@@ -6,7 +6,7 @@ var db = require('../models');
 
 /*==================================EXPRESS ROUTES====================================*/
 
-// Populates index.hbs
+// Populates INDEX.HBS (COULD SHORTEN..?)
 router.get('/', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
@@ -65,7 +65,7 @@ router.post("/api/reserved", function (req, res) {
         });
 });
 
-// populates reserved.hbs. | used in the admin view
+// populates RESERVED.HBS | used in the admin view | NOT YET IMPLIMENTED
 router.get("/api/reserved", function (req, res) {
     db.item.findAll({
         where: {
@@ -76,7 +76,7 @@ router.get("/api/reserved", function (req, res) {
     });
 });
 
-// Populates search.hbs
+// Populates SEARCH.HBS
 router.get("/search", function (req, res) {
     res.render('search');
     console.log("search route working");
@@ -100,6 +100,7 @@ router.post("/newSearch", function (req, res) {
     });
 });
 
+//AVAILABLE.HBS
 router.get('/available', function (req, res) {
     // retrieve all data from food_db
     db.item.findAll({
@@ -148,6 +149,7 @@ router.post("/add/new", function (req, res) {
     });
 });
 
+// ABOUT.HBS
 router.get("/about", function (req, res) {
     res.render('about');
     console.log("search route working");
@@ -175,12 +177,12 @@ router.post("/register", function(req, res) {
     });
 });
 // 177 -189 not yet implimented anywhere else
-router.post("/login", passport.authenticate("local",
-{
-  successRedirect: "/search",
-  failureRedirect: "/index"
-}), function(req, res) {
-});
+// router.post("/login", passport.authenticate("local",
+// {
+//   successRedirect: "/search",
+//   failureRedirect: "/index"
+// }), function(req, res) {
+// });
 
 router.get("/logout", function(req, res) {
 req.logout();
