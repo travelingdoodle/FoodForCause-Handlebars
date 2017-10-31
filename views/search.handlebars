@@ -11,12 +11,16 @@
                 <div class="mx-auto text-left">
                     <h3 class="section-heading">Search For Availble Items!</h3>
                     <form action="/newSearch" method="POST" role="form">
-                     <input type="text-center" id="item-search" class="form-control" name="userSearch">
+                        <input type="text-center" id="item-search" class="form-control" name="userSearch">
                         <a class="btn btn-primary btn-xl js-scroll-trigger" style="float: right;" id="search-btn">
                             <span class="glyphicon glyphicon-search"></span> Search</a>
-                     </form>
+                    </form>
                 </div>
-                {{> search/searchTable}}
+                <div class="row" id="searchTableRow">
+                    <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {{> search/searchTable}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -528,15 +528,14 @@
  
  #table-content {
      text-align: left; 
- 
- }   
- 
+ }  
+
  #table-content tr {
      border-bottom: 1px solid white;
  }
  
- #availTable, #searchTable {
-     margin-top: 50px;
+ .table .table, #availTable, #searchTable {
+     padding-top: 10px;
      background: rgba(0,0,0,0.35);
  }
  
@@ -544,7 +543,6 @@
      font-family: 'Special Elite', cursive;
  }
 
- #searchTable {
-    /* border-top: 1px solid white;  */
-    margin-top: 10px;
- }
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background: rgba(0,0,0,0.75);
+}
