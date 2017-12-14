@@ -8,7 +8,6 @@
 * Many grocery stores, and restaurants throw away food that could go to good use.
     * Some of these items will expire soon.
     * Others items may have damaged packaging or other small defects that do not affect the quality of the product, but the store is still unable to sell the items.
-* Food banks and Kitchens provide a valuable service: feeding people in our community that need assistance and sustenance.
 * A large amount of food is unnecessarily wasted.
 * Our community needs food assistance programs to thrive and care for those in need.
 
@@ -24,11 +23,13 @@
 ### What powers FoodForCause?
 * Node/ Express
 * MySQL
+* Sequelize 
 * Heroku
 * Passport.js User Authentication
 
 
-
+# Updates
+### Please Feel Free To Submit A Pull Request!
 ## __ISSUES WITH DESIGN__
 * These issues seem to stem from the way that the info is centered on the top image.
     * Possible solution: Make the  `FoodForCause` text at the top a permanent part of the img, or fixed position, and then have the rest of the stuff centered in the remaining space. __(Thoughts, Meg?)__
@@ -37,19 +38,18 @@
         * top of page is cut off, can't see 'food for cause' title
     * available.html
         * The papge starts further down than 'view.html' ... maybe an extra div?
-* __Oct.21:__ Here is a screen shot that illustrate the following:
+* __Oct.21:__ 
     * The Food For Cause title and the menu bar are not fixed, and they get pushed up and cut off when there are more than a few results (a problem on all pages)
     * The search results overflow and break the page style
 
 ## Nice To Have:
-* __Oct. 21:__
-    * Calculate remaining time until items expire, and display it use it for twilio / tweets
-    * Allow users to reserve a certain amount (lbs.) of an item
-        * Display the remaining amount of goods
-* https://www.twilio.com/
-    * Send Texts for notifications about specific items
-* Tweets to notify of available items that will expire soon
-* Connect on FB/ IG..?
+* Calculate remaining time until items expire, and display it use it for twilio / tweets
+* Allow users to reserve a certain amount (lbs.) of an item
+* Display the remaining amount of goods
+* Alerts:
+    * https://www.twilio.com/
+        * Send Texts for notifications about specific items
+    * Tweets to notify of available items that will expire soon
 * Authentication
     * Reestablish (Disabled for ease of Presentation)
 * Testing
